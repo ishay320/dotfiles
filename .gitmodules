@@ -1,0 +1,4 @@
+[submodule "nvim"]
+	path = nvim
+	url = https://github.com/ishay320/neovim-config
+	branch = master
