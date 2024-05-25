@@ -143,15 +143,24 @@ fi
 export PATH=${PATH}:/opt/cuda/bin/
 export LD_LIBRARY_PATH=/opt/cuda/lib64/:$LD_LIBRARY_PATH
 
-
-tmux_start () {
-    # Use -d to allow the rest of the function to run
-    tmux new-session -d -s work -n neovim
-    # send letter by letter so when the nvim closes the window remain
-    tmux send-keys -t neovim "nvim ." Enter
-    # -d to prevent current window from changing
-    tmux new-window -d -n terminal
-    # -d to detach any other client (which there shouldn't be,
-    # since you just created the session).
-    tmux attach-session -d -t work
+# **********
+# ** tmux **
+# **********
+tmux_start() {
+	# Use -d to allow the rest of the function to run
+	tmux new-session -d -s work -n neovim
+	# send letter by letter so when the nvim closes the window remain
+	tmux send-keys -t neovim "nvim ." Enter
+	# -d to prevent current window from changing
+	tmux new-window -d -n terminal
+	# -d to detach any other client (which there shouldn't be,
+	# since you just created the session).
+	tmux attach-session -d -t work
 }
+
+# *********
+# ** fzf **
+# *********
+if command -v fzf &>/dev/null; then
+	eval "$(fzf --bash)"
+fi
