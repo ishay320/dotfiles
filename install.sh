@@ -37,3 +37,12 @@ link_file() {
 		link_file "$src" "$dest"
 	done
 } <"${FILE}"
+
+log_info "pulling all submodels"
+git submodule update --init
+
+log_info "moving nvim to master"
+cd ./nvim
+git checkout master
+git pull
+cd ..
