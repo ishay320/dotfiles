@@ -1,0 +1,5 @@
+source file,destination path
+.tmux.conf,~/
+.bashrc,~/
+nvim,~/.config/
+
