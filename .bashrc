@@ -1,7 +1,5 @@
 # /etc/bash.bashrc
 #
-# https://wiki.archlinux.org/index.php/Color_Bash_Prompt
-#
 # This file is sourced by all *interactive* bash shells on startup,
 # including some apparently interactive shells such as scp and rcp
 # that can't tolerate any output. So make sure this doesn't display
@@ -24,6 +22,12 @@ shopt -s checkwinsize
 shopt -s histappend
 # Ignore double commands in history
 export HISTCONTROL=ignoreboth:erasedups
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 case ${TERM} in
 xterm* | rxvt* | Eterm | aterm | kterm | gnome*)
@@ -33,13 +37,6 @@ screen)
 	PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033_%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
 	;;
 esac
-
-# fortune is a simple program that displays a pseudorandom message
-# from a database of quotations at logon and/or logout.
-# If you wish to use it, please install "fortune-mod" from the
-# official repositories, then uncomment the following line:
-
-#[[ "$PS1" ]] && /usr/bin/fortune
 
 # Set colorful PS1 only on colorful terminals.
 # dircolors --print-database uses its own built-in database
@@ -57,7 +54,7 @@ match_lhs=""
 	type -P dircolors >/dev/null &&
 	match_lhs=$(dircolors --print-database)
 
-if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* ]]; then
+if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* || ($TERM == xterm-color || $TERM == *-256color) ]]; then
 
 	# we have colors :-)
 
@@ -81,9 +78,7 @@ if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* ]]; then
 	alias dmesg='dmesg --color'
 
 	# Uncomment the "Color" line in /etc/pacman.conf instead of uncommenting the following line...!
-
 	# alias pacman="pacman --color=auto"
-
 else
 
 	# show root@ when we do not have colors
@@ -123,13 +118,14 @@ if [ "$PS1" ]; then
 fi
 
 # alias
-alias ls='ls --color=auto'
 alias ll='ls -alF'
-alias ifconfig='ip addr'
+alias la='ls -A'
+alias l='ls -CF'
 
 alias mirrorx='sudo reflector --age 6 --latest 20 --fastest 20 --threads 20 --sort rate --protocol https --save /etc/pacman.d/mirrorlist'
 
 alias beep='printf "\a"'
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 export VISUAL=nvim
 export EDITOR="$VISUAL"
@@ -161,6 +157,8 @@ tmux_start() {
 # *********
 # ** fzf **
 # *********
+
 if command -v fzf &>/dev/null; then
 	eval "$(fzf --bash)"
 fi
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
