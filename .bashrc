@@ -142,7 +142,7 @@ export LD_LIBRARY_PATH=/opt/cuda/lib64/:$LD_LIBRARY_PATH
 # **********
 # ** tmux **
 # **********
-tmux_start() {
+function t() {
 	# Use -d to allow the rest of the function to run
 	tmux new-session -d -s work -n neovim
 	# send letter by letter so when the nvim closes the window remain
@@ -161,4 +161,6 @@ tmux_start() {
 if command -v fzf &>/dev/null; then
 	eval "$(fzf --bash)"
 fi
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+if [ -f ~/.fzf.bash ]; then
+	source ~/.fzf.bash
+fi
