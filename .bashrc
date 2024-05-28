@@ -67,10 +67,22 @@ if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* || ($TERM == xterm-color |
 		fi
 	fi
 
-	PS1="$(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;32m\]\u@\h'; fi)\[\033[01;34m\] \w \$([[ \$? != 0 ]] && echo \"\[\033[01;31m\]:(\[\033[01;34m\] \")\\$\[\033[00m\] "
+	# shows sad face if last command returned non zero value
+	__ans_check() {
+		[[ $? != 0 ]] && echo -e "\033[01;31m:(\033[01;34m"
+	}
+	# prints the branch of the path if repo exists
+	__parse_git_branch() {
+		local r=$?
+		[[ -d .git ]] && git symbolic-ref HEAD 2>/dev/null | sed 's#\(.*\)\/\([^\/]*\)$#(\2)#'
+		return $r
+	}
 
-	# Use this other PS1 string if you want \W for root and \w for all other users:
-	# PS1="$(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h\[\033[01;34m\] \W'; else echo '\[\033[01;32m\]\u@\h\[\033[01;34m\] \w'; fi) \$([[ \$? != 0 ]] && echo \"\[\033[01;31m\]:(\[\033[01;34m\] \")\\$\[\033[00m\] "
+	PS1="$(if [[ ${EUID} == 0 ]]; then
+		echo '\[\033[01;31m\]\h'
+	else
+		echo '\[\033[01;32m\]\u@\h'
+	fi)\[\033[01;34m\] \w \[\033[0;90m\]\$(__parse_git_branch)\[\033[01;34m\]\$(__ans_check)\$\[\033[00m\] "
 
 	alias ls="ls --color=auto"
 	alias dir="dir --color=auto"
@@ -80,14 +92,8 @@ if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* || ($TERM == xterm-color |
 	# Uncomment the "Color" line in /etc/pacman.conf instead of uncommenting the following line...!
 	# alias pacman="pacman --color=auto"
 else
-
 	# show root@ when we do not have colors
-
 	PS1="\u@\h \w \$([[ \$? != 0 ]] && echo \":( \")\$ "
-
-	# Use this other PS1 string if you want \W for root and \w for all other users:
-	# PS1="\u@\h $(if [[ ${EUID} == 0 ]]; then echo '\W'; else echo '\w'; fi) \$([[ \$? != 0 ]] && echo \":( \")\$ "
-
 fi
 
 PS2="> "
