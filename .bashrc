@@ -82,7 +82,7 @@ if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* || ($TERM == xterm-color |
 		echo '\[\033[01;31m\]\h'
 	else
 		echo '\[\033[01;32m\]\u@\h'
-	fi)\[\033[01;34m\] \w \[\033[0;90m\]\$(__parse_git_branch)\[\033[01;34m\]\$(__ans_check)\$\[\033[00m\] "
+	fi)\[\033[01;34m\] \w \[\033[0;90m\]\$(__parse_git_branch)\[\033[01;34m\]\$(__ans_check)\$\[\033[00m\] "
 
 	alias ls="ls --color=auto"
 	alias dir="dir --color=auto"
