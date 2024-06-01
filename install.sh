@@ -42,7 +42,7 @@ log_info "pulling all submodels"
 git submodule update --init
 
 log_info "moving nvim to master"
-cd ./nvim
+cd ./nvim || exit
 git checkout master
 git pull
 cd ..
