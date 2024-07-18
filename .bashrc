@@ -138,6 +138,7 @@ export LESS_TERMCAP_mb=$'\E[01;31m' \
 
 if [ "$PS1" ]; then
 	complete -cf sudo
+	complete -F _root_command sudo
 fi
 
 # alias
