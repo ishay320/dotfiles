@@ -75,6 +75,14 @@ if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* || ($TERM == xterm-color |
 	}
 
 	PROMPT_COMMAND=__prompt_command
+	__venv() {
+		# Let's only check for a virtual environment if the VIRTUAL_ENV variable is
+		# set. This should eek out a little more performance when we're not in one
+		# since we won't need to call basename.
+		if [ -n "${VIRTUAL_ENV}" ] && [ -z "${VIRTUAL_ENV_DISABLE_PROMPT:-}" ]; then
+			echo "($(basename "${VIRTUAL_ENV}"))"
+		fi
+	}
 
 	__prompt_command() {
 		local EXIT="$?" # This needs to be first
@@ -91,6 +99,7 @@ if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* || ($TERM == xterm-color |
 		local BBlu='\[\e[1;34m\]'
 		local BIBla='\[\e[1;90m\]'
 
+		PS1+="$(__venv)"                      # python venv
 		PS1+="${BGre}\u@\h"                   # user and machine
 		PS1+="${BBlu}\w"                      # show path
 		PS1+=" ${BIBla}$(__parse_git_branch)" # show git branch if in one
