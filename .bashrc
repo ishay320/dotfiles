@@ -100,7 +100,7 @@ if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* || ($TERM == xterm-color |
 		local BIBla='\[\e[1;90m\]'
 
 		PS1+="$(__venv)"                      # python venv
-		PS1+="${BGre}\u@\h"                   # user and machine
+		PS1+="${BGre}\u@\h "                   # user and machine
 		PS1+="${BBlu}\w"                      # show path
 		PS1+=" ${BIBla}$(__parse_git_branch)" # show git branch if in one
 		if [ $EXIT != 0 ]; then               # shows sad face if last command returned non zero value
