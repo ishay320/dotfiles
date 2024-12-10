@@ -70,7 +70,7 @@ if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* || ($TERM == xterm-color |
 	# prints the branch of the path if repo exists
 	__parse_git_branch() {
 		local r=$?
-		[[ -d .git ]] && git symbolic-ref HEAD 2>/dev/null | sed 's#\(.*\)\/\([^\/]*\)$#(\2)#'
+		[[ $(git rev-parse --is-inside-work-tree 2> /dev/null) ]] && git symbolic-ref HEAD 2>/dev/null | sed 's#\(.*\)\/\([^\/]*\)$#(\2)#'
 		return $r
 	}
 
