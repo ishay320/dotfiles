@@ -17,7 +17,7 @@ install_nvim() {
 	# Check if Neovim is already installed
 	if command -v nvim >/dev/null; then
 		echo "Neovim is already installed at $(command -v nvim)"
-		read -p -r "Reinstall / Update? ([Y]/n): " response
+		read -p "Reinstall / Update? ([Y]/n): " response
 		response=${response,,} # Convert to lowercase
 		if [[ "$response" == "n" ]]; then
 			echo "Skipping installation."
@@ -34,7 +34,7 @@ install_nvim() {
 	echo "Neovim installed successfully."
 }
 
-read -p -r "Install Neovim? ([Y]/n): " response
+read -p "Install Neovim? ([Y]/n): " response
 response=${response,,} # Convert to lowercase
 if [[ "$response" != "n" ]]; then
 	install_nvim
