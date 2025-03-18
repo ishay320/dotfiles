@@ -54,7 +54,7 @@ match_lhs=""
 	type -P dircolors >/dev/null &&
 	match_lhs=$(dircolors --print-database)
 
-if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* || ($TERM == xterm-color || $TERM == *-256color) ]]; then
+if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* || ($TERM == xterm-color || $TERM == *-256color || $TERM == "xterm-ghostty") ]]; then
 
 	# we have colors :-)
 
@@ -70,7 +70,7 @@ if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* || ($TERM == xterm-color |
 	# prints the branch of the path if repo exists
 	__parse_git_branch() {
 		local r=$?
-		[[ $(git rev-parse --is-inside-work-tree 2> /dev/null) ]] && git symbolic-ref HEAD 2>/dev/null | sed 's#\(.*\)\/\([^\/]*\)$#(\2)#'
+		[[ $(git rev-parse --is-inside-work-tree 2>/dev/null) ]] && git symbolic-ref HEAD 2>/dev/null | sed 's#\(.*\)\/\([^\/]*\)$#(\2)#'
 		return $r
 	}
 
@@ -100,7 +100,7 @@ if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* || ($TERM == xterm-color |
 		local BIBla='\[\e[1;90m\]'
 
 		PS1+="$(__venv)"                      # python venv
-		PS1+="${BGre}\u@\h "                   # user and machine
+		PS1+="${BGre}\u@\h "                  # user and machine
 		PS1+="${BBlu}\w"                      # show path
 		PS1+=" ${BIBla}$(__parse_git_branch)" # show git branch if in one
 		if [ $EXIT != 0 ]; then               # shows sad face if last command returned non zero value
