@@ -50,7 +50,7 @@ install_system_packages() {
   }
 
   install_ubuntu() {
-    local pkgs=(zip wget curl ripgrep build-essential)
+    local pkgs=(zip wget curl ripgrep build-essential npm)
     echo "Updating apt package lists..."
     sudo apt update
     if confirm_install "${pkgs[@]}"; then
@@ -61,7 +61,7 @@ install_system_packages() {
   }
 
   install_arch() {
-    local pkgs=(zip wget curl ripgrep base-devel)
+    local pkgs=(zip wget curl ripgrep base-devel npm)
     echo "Updating pacman database..."
     sudo pacman -Sy --noconfirm
     if confirm_install "${pkgs[@]}"; then
