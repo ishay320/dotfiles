@@ -182,5 +182,7 @@ elseif ($Update) {
     Install-Or-Update-PSFzf
 }
 
+git config --global alias.adog "log --all --decorate --oneline --graph --pretty=format:'%C(auto)%h%d %s %C(blue)<%an>%Creset %C(green)(%ar)%Creset'"
+
 Write-Host "Done."
 
