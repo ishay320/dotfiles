@@ -17,9 +17,18 @@ MODE=""
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    -i|--install) MODE="install"; shift ;;
-    -u|--update)  MODE="update"; shift ;;
-    *) echo "Unknown option: $1"; print_usage ;;
+  -i | --install)
+    MODE="install"
+    shift
+    ;;
+  -u | --update)
+    MODE="update"
+    shift
+    ;;
+  *)
+    echo "Unknown option: $1"
+    print_usage
+    ;;
   esac
 done
 
@@ -43,14 +52,21 @@ install_system_packages() {
     echo -n "Do you want to continue? [Y/n]: "
     read -r answer
     case "$answer" in
-      [Nn]*) echo "Installation cancelled."; return 1 ;;
-      [Yy\n]*|"") return 0 ;;
-      *) echo "Input error"; confirm_install "$@"; return $? ;;
+    [Nn]*)
+      echo "Installation cancelled."
+      return 1
+      ;;
+    [Yy\n]* | "") return 0 ;;
+    *)
+      echo "Input error"
+      confirm_install "$@"
+      return $?
+      ;;
     esac
   }
 
   install_ubuntu() {
-    local pkgs=(zip wget curl ripgrep build-essential npm)
+    local pkgs=(zip wget curl ripgrep build-essential npm python3-venv)
     echo "Updating apt package lists..."
     sudo apt update
     if confirm_install "${pkgs[@]}"; then
@@ -72,13 +88,13 @@ install_system_packages() {
   }
 
   case "$ID" in
-    ubuntu|debian) install_ubuntu ;;
-    arch) install_arch ;;
-    *)
-      echo "Unsupported OS: $ID"
-      echo "Install zip, wget, curl, ripgrep, and build tools manually."
-      exit 1
-      ;;
+  ubuntu | debian) install_ubuntu ;;
+  arch) install_arch ;;
+  *)
+    echo "Unsupported OS: $ID"
+    echo "Install zip, wget, curl, ripgrep, and build tools manually."
+    exit 1
+    ;;
   esac
 }
 
@@ -87,12 +103,12 @@ install_system_packages() {
 install_or_update_nvim() {
   ARCH=$(uname -m)
   case "$ARCH" in
-    x86_64) NVIM_URL="https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.appimage" ;;
-    aarch64) NVIM_URL="https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-arm64.appimage" ;;
-    *)
-      echo "Unsupported architecture: $ARCH"
-      exit 1
-      ;;
+  x86_64) NVIM_URL="https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.appimage" ;;
+  aarch64) NVIM_URL="https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-arm64.appimage" ;;
+  *)
+    echo "Unsupported architecture: $ARCH"
+    exit 1
+    ;;
   esac
 
   if [[ "$MODE" == "install" && -x "$(command -v nvim)" ]]; then
@@ -121,7 +137,7 @@ install_or_update_fzf() {
     if [[ "$MODE" == "install" ]]; then
       ./install
     else
-      yes | ./install --all > /dev/null
+      yes | ./install --all >/dev/null
     fi
   else
     echo "Installing fzf..."
@@ -129,7 +145,7 @@ install_or_update_fzf() {
     if [[ "$MODE" == "install" ]]; then
       ~/.fzf/install --no-bash
     else
-      yes | ~/.fzf/install --no-bash  > /dev/null
+      yes | ~/.fzf/install --no-bash >/dev/null
     fi
   fi
   echo "fzf installed/updated successfully."
@@ -161,3 +177,4 @@ git config --global alias.adog "log --all --decorate --oneline --graph --pretty=
 
 echo "Done."
 
+# TODO: check if i need to add 'python3-venv' to arch
