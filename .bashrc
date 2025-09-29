@@ -86,6 +86,8 @@ if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* || ($TERM == xterm-color |
 
 	__prompt_command() {
 		local EXIT="$?" # This needs to be first
+		printf '\033]133;A\007'
+
 		PS1=""
 
 		if [[ ${EUID} == 0 ]]; then

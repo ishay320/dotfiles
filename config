@@ -1,0 +1,5 @@
+# This is the configuration file for Ghostty
+#
+
+keybind = shift+up=jump_to_prompt:-1
+keybind = shift+down=jump_to_prompt:1
