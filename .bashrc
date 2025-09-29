@@ -85,13 +85,14 @@ if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* || ($TERM == xterm-color |
 	}
 
 	__prompt_command() {
-		local EXIT="$?" # This needs to be first
-		printf '\033]133;A\007'
+		local EXIT="$?"         # This needs to be first
+		printf '\033]133;A\007' # Mark the start of prompt
 
 		PS1=""
 
 		if [[ ${EUID} == 0 ]]; then
 			PS1+='\[\033[01;31m\]\h'
+			PS1+='\[\033]133;B\007\]' # Mark the end of prompt
 			return
 		fi
 		local RCol='\[\e[0m\]'
@@ -108,8 +109,8 @@ if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* || ($TERM == xterm-color |
 		if [ $EXIT != 0 ]; then               # shows sad face if last command returned non zero value
 			PS1+="${Red}:(${RCol}"
 		fi
-		PS1+="${BBlu}\$${RCol}" # show $
-		PS1+=' '                # searchable empty char
+		PS1+="${BBlu}\$${RCol}"   # show $
+		PS1+='\[\033]133;B\007\]' # Mark the end of prompt
 	}
 
 	alias ls="ls --color=auto"
