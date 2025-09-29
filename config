@@ -1,5 +1,14 @@
-# This is the configuration file for Ghostty
-#
+# Configuration file for Ghostty
 
-keybind = shift+up=jump_to_prompt:-1
-keybind = shift+down=jump_to_prompt:1
+theme = Catppuccin Mocha
+shell-integration-features = ssh-env,ssh-terminfo,sudo
+
+## consider
+# font-feature = -calt
+# gtk-titlebar = false
+# mouse-hide-while-typing = true
+
+## keybindings: 
+# show all: `ghostty +list-keybinds`
+keybind = ctrl+shift+up=jump_to_prompt:-1
+keybind = ctrl+shift+down=jump_to_prompt:1
