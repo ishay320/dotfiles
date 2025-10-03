@@ -3,3 +3,4 @@ source file,destination path
 .bashrc,~/
 nvim,~/.config/
 config,~/.config/ghostty/
+smear.glsl,~/.config/ghostty/

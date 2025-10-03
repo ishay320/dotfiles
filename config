@@ -1,14 +1,34 @@
 # Configuration file for Ghostty
 
+# Visuals
 theme = Catppuccin Mocha
-shell-integration-features = ssh-env,ssh-terminfo,sudo
+gtk-tabs-location = bottom
+custom-shader-animation = true
+custom-shader = ./smear.glsl
 
-## consider
+
+# Productivity
+clipboard-trim-trailing-spaces = true
+clipboard-paste-protection = true
+mouse-hide-while-typing = true
+shell-integration = detect
+shell-integration-features = ssh-env,sudo
+# ssh-terminfo
+
+
+# Terminal behavior
+scrollback-limit = 10000000
+
+# Font
 # font-feature = -calt
-# gtk-titlebar = false
-# mouse-hide-while-typing = true
 
 ## keybindings: 
-# show all: `ghostty +list-keybinds`
+# show all keybinds: `ghostty +list-keybinds`
 keybind = ctrl+shift+up=jump_to_prompt:-1
 keybind = ctrl+shift+down=jump_to_prompt:1
+
+keybind = performable:ctrl+shift+h=goto_split:left
+keybind = performable:ctrl+shift+j=goto_split:bottom
+keybind = performable:ctrl+shift+k=goto_split:top
+keybind = performable:ctrl+shift+l=goto_split:right
+
