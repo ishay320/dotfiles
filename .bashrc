@@ -67,55 +67,40 @@ if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* || ($TERM == xterm-color |
 		fi
 	fi
 
-	# prints the branch of the path if repo exists
-	__parse_git_branch() {
-		local r=$?
+	__git_branch() {
+		local err=$?
 		[[ $(git rev-parse --is-inside-work-tree 2>/dev/null) ]] && git symbolic-ref HEAD 2>/dev/null | sed 's#\(.*\)\/\([^\/]*\)$#(\2)#'
-		return $r
+		return $err
 	}
 
-	PROMPT_COMMAND=__prompt_command
-	__venv() {
-		# Let's only check for a virtual environment if the VIRTUAL_ENV variable is
-		# set. This should eek out a little more performance when we're not in one
-		# since we won't need to call basename.
-		if [ -n "${VIRTUAL_ENV}" ] && [ -z "${VIRTUAL_ENV_DISABLE_PROMPT:-}" ]; then
-			echo "($(basename "${VIRTUAL_ENV}"))"
+	__exit_status() {
+		if [ $? != 0 ]; then
+			echo ":("
 		fi
 	}
 
-	__prompt_command() {
-		local EXIT="$?"         # This needs to be first
-		printf '\033]133;A\007' # Mark the start of prompt
+	RCol='\[\e[0m\]'
+	Red='\[\e[0;31m\]'
+	BGre='\[\e[1;32m\]'
+	BBlu='\[\e[1;34m\]'
+	BIBla='\[\e[1;90m\]'
 
-		PS1=""
-
-		if [[ ${EUID} == 0 ]]; then
-			PS1+='\[\033[01;31m\]\h'
-			PS1+='\[\033]133;B\007\]' # Mark the end of prompt
-			return
-		fi
-		local RCol='\[\e[0m\]'
-
-		local Red='\[\e[0;31m\]'
-		local BGre='\[\e[1;32m\]'
-		local BBlu='\[\e[1;34m\]'
-		local BIBla='\[\e[1;90m\]'
-
-		PS1+="$(__venv)"                      # python venv
-		PS1+="${BGre}\u@\h "                  # user and machine
-		PS1+="${BBlu}\w"                      # show path
-		PS1+=" ${BIBla}$(__parse_git_branch)" # show git branch if in one
-		if [ $EXIT != 0 ]; then               # shows sad face if last command returned non zero value
-			PS1+="${Red}:(${RCol}"
-		fi
-		PS1+="${BBlu}\$${RCol}"   # show $
-		PS1+='\[\033]133;B\007\]' # Mark the end of prompt
-	}
+	if [[ ${EUID} == 0 ]]; then
+		PS1="${Red}\h${RCol}:${BBlu}\w${Red}\$${RCol} "
+	else
+		# Build PS1 with command substitution for dynamic parts
+		PS1="${BGre}\u@\h${RCol}:"      # user@host
+		PS1+="${BBlu}\w "               # working directory
+		PS1+="${BIBla}\$(__git_branch)" # git branch (dynamic)
+		PS1+="${Red}\$(__exit_status)"  # sad face on error
+		PS1+="${BBlu}\$${RCol} "        # prompt symbol
+	fi
 
 	alias ls="ls --color=auto"
 	alias dir="dir --color=auto"
 	alias grep="grep --color=auto"
+	alias fgrep='fgrep --color=auto'
+	alias egrep='egrep --color=auto'
 	alias dmesg='dmesg --color'
 
 	# Uncomment the "Color" line in /etc/pacman.conf instead of uncommenting the following line...!
