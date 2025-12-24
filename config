@@ -3,8 +3,8 @@
 # Visuals
 theme = Catppuccin Mocha
 gtk-tabs-location = bottom
-custom-shader-animation = true
-custom-shader = ./smear.glsl
+# custom-shader-animation = true
+# custom-shader = ./smear.glsl
 mouse-scroll-multiplier = precision:1,discrete:1
 
 
