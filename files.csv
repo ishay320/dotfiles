@@ -1,6 +1,6 @@
 source file,destination path
-.tmux.conf,~/
-.bashrc,~/
+links/.tmux.conf,~/
+links/.bashrc,~/
 nvim,~/.config/
-config,~/.config/ghostty/
-smear.glsl,~/.config/ghostty/
+links/config,~/.config/ghostty/
+links/smear.glsl,~/.config/ghostty/
