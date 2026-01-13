@@ -65,4 +65,8 @@ configure_xdg
 configure_services
 update_man_db
 set_custom_fonts
+
+# add tty without root
+sudo usermod -a -G uucp $USER
+
 echo "Installation and configuration complete!"
