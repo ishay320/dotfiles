@@ -69,4 +69,7 @@ set_custom_fonts
 # add tty without root
 sudo usermod -a -G uucp $USER
 
+# get the fastest mirrors for pacman
+sudo reflector --latest 20 --age 12 --country IL --sort rate --save /etc/pacman.d/mirrorlist
+
 echo "Installation and configuration complete!"
