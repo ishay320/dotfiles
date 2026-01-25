@@ -29,6 +29,7 @@ extra/wget
 extra/wireshark-qt
 extra/xdg-utils
 extra/gnome-shell-extension-appindicator
+extra/nvidia-prime
 
 https://aur.archlinux.org/yay.git
 
