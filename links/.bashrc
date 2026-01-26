@@ -125,13 +125,14 @@ unset safe_term match_lhs
 [ -r /usr/share/doc/pkgfile/command-not-found.bash ] && . /usr/share/doc/pkgfile/command-not-found.bash
 
 # less colors
-export LESS_TERMCAP_mb=$'\E[01;31m' \
-	LESS_TERMCAP_md=$'\E[01;38;5;74m' \
-	LESS_TERMCAP_me=$'\E[0m' \
-	LESS_TERMCAP_se=$'\E[0m' \
-	LESS_TERMCAP_so=$'\E[0;33m' \
-	LESS_TERMCAP_ue=$'\E[0m' \
-	LESS_TERMCAP_us=$'\E[04;38;5;146m'
+export LESS_TERMCAP_mb=$'\e[1;32m'    # begin bold (green)
+export LESS_TERMCAP_md=$'\e[1;36m'    # begin bold (cyan)
+export LESS_TERMCAP_me=$'\e[0m'       # end mode
+export LESS_TERMCAP_se=$'\e[0m'       # end standout-mode
+export LESS_TERMCAP_so=$'\e[1;33;44m' # begin standout-mode (yellow on blue)
+export LESS_TERMCAP_us=$'\e[4;1;37m'  # begin underline (white)
+export LESS_TERMCAP_ue=$'\e[0m'       # end underline
+export GROFF_NO_SGR=1
 
 if [ "$PS1" ]; then
 	complete -cf sudo
