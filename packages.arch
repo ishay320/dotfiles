@@ -30,6 +30,7 @@ extra/wireshark-qt
 extra/xdg-utils
 extra/gnome-shell-extension-appindicator
 extra/nvidia-prime
+extra/reflector
 
 https://aur.archlinux.org/yay.git
 
@@ -37,4 +38,3 @@ aur/culmus
 aur/google-chrome
 aur/ttf-ms-fonts
 aur/visual-studio-code-bin
-aur/reflector
