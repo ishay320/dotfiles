@@ -72,4 +72,7 @@ sudo usermod -a -G uucp $USER
 # get the fastest mirrors for pacman
 sudo reflector --latest 20 --age 12 --country IL --sort rate --save /etc/pacman.d/mirrorlist
 
+# enable subpixel rendering
+sudo ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
+
 echo "Installation and configuration complete!"
