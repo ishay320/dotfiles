@@ -2,13 +2,17 @@
 
 ## installation
 
-Until i have script, use:
-
 ```bash
-$ ln -s /home/ishay320/dotfiles/.file ..
+./install.sh
+./link.sh
 ```
 
-## windows
+> It will run also the configs.
 
-For running scripts, run the command: `Set-ExecutionPolicy RemoteSigned`
-and the `link.ps1` need to be run using root
+## Gnome extensions
+
+- Appindicator and KStatusNotifierItem Support
+- Caffeine
+- Dash to Dock
+- Desktop Icons NG(DING)
+- Resource Monitor
