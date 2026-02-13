@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 set -e
 
+BASE_PACKAGES_FOLDER="./packages/"
+
 install_arch() {
-  local pkgs_file_path="./packages.arch"
+  local pkgs_file_path="$BASE_PACKAGES_FOLDER/packages.arch"
   for pkg in $(cat "$pkgs_file_path"); do
     if [[ $pkg == https://* ]]; then
       echo "Installing AUR package from $pkg"
@@ -20,7 +22,7 @@ install_arch() {
 }
 
 install_ubuntu() {
-  local pkgs_file_path="./packages.ubuntu"
+  local pkgs_file_path="$BASE_PACKAGES_FOLDER/packages.ubuntu"
   # sudo apt update
   for pkg in $(cat "$pkgs_file_path"); do
     echo "Installing package $pkg via apt"
