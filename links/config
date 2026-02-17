@@ -7,6 +7,8 @@ gtk-tabs-location = bottom
 # custom-shader = ./smear.glsl
 mouse-scroll-multiplier = precision:1,discrete:1
 
+# Font
+font-family = "FiraMono Nerd Font Mono"
 
 # Productivity
 clipboard-trim-trailing-spaces = true
@@ -21,7 +23,7 @@ shell-integration-features = ssh-env,sudo
 scrollback-limit = 10000000
 
 # Font
-# font-feature = -calt
+font-feature = -calt
 
 ## keybindings: 
 # show all keybinds: `ghostty +list-keybinds`
