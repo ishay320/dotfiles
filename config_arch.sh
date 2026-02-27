@@ -75,4 +75,7 @@ sudo reflector --latest 20 --age 12 --country IL --sort rate --save /etc/pacman.
 # enable subpixel rendering
 sudo ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
 
+sudo systemctl enable --now iwd
+sudo systemctl enable --now systemd-resolved
+
 echo "Installation and configuration complete!"

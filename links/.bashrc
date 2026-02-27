@@ -151,6 +151,13 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 alias vim='nvim'
 
+n() { if [ "$#" -eq 0 ]; then command nvim .; else command nvim "$@"; fi; }
+open() (
+	xdg-open "$@" >/dev/null 2>&1 &
+)
+
+alias todo="nvim ~/TODO.md"
+
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 

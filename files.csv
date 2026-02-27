@@ -1,6 +1,9 @@
-source file,destination path
-links/.tmux.conf,~/
-links/.bashrc,~/
-nvim,~/.config/
-links/config,~/.config/ghostty/
-links/smear.glsl,~/.config/ghostty/
+action,source file,destination path
+link,./links/.tmux.conf,~/
+link,./links/.bashrc,~/
+link,./nvim,~/.config/
+link,./links/config,~/.config/ghostty/
+link,./links/smear.glsl,~/.config/ghostty/
+!copy,./config/iwd/iwd_network_manager.conf,/etc/NetworkManager/conf.d/
+!copy,./config/iwd/main.conf,/etc/iwd/
+link,./config/xdg-terminals.list,~/.config/

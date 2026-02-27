@@ -31,6 +31,7 @@ extra/xdg-utils
 extra/gnome-shell-extension-appindicator
 extra/nvidia-prime
 extra/reflector
+extra/noto-fonts
 
 https://aur.archlinux.org/yay.git
 
@@ -38,3 +39,5 @@ aur/culmus
 aur/google-chrome
 aur/ttf-ms-fonts
 aur/visual-studio-code-bin
+extra/wl-clipboard
+aur/xdg-terminal-exec 
