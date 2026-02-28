@@ -82,11 +82,14 @@ copy_file() {
 	done
 } <"${FILE}"
 
-log_info "pulling all submodels"
-git submodule update --init
+read -p "Do you want to update nvim config? (y/N) " update_nvim
+if [[ "$update_nvim" == "y" ]]; then
+	log_info "pulling all submodels"
+	git submodule update --init
 
-log_info "moving nvim to master"
-cd ./nvim || exit
-git checkout master
-git pull
-cd ..
+	log_info "moving nvim to master"
+	cd ./nvim || exit
+	git checkout master
+	git pull
+	cd ..
+fi

@@ -77,5 +77,6 @@ sudo ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/con
 
 sudo systemctl enable --now iwd
 sudo systemctl enable --now systemd-resolved
+sudo systemctl enable --now swayosd-libinput-backend
 
 echo "Installation and configuration complete!"
