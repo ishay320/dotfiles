@@ -21,10 +21,12 @@ shopt -s checkwinsize
 # Enable history appending instead of overwriting.
 shopt -s histappend
 # Ignore double commands in history
-export HISTCONTROL=ignoreboth:erasedups
+HISTCONTROL=ignoreboth:erasedups
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=10000
+HISTFILESIZE=20000
+HISTTIMEFORMAT=$'\e[1;36m''[%d/%m %H:%M:%S]'$'\e[m'' '
+PROMPT_COMMAND="history -a; history -c; history -r; ${PROMPT_COMMAND}"
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -110,10 +112,6 @@ else
 	PS1="\u@\h \w \$([[ \$? != 0 ]] && echo \":( \")\$ "
 fi
 
-PS2="> "
-PS3="> "
-PS4="+ "
-
 # Try to keep environment pollution down, EPA loves us :-)
 unset safe_term match_lhs
 
@@ -149,9 +147,8 @@ alias mirrorx='sudo reflector --age 6 --latest 20 --fastest 20 --threads 20 --so
 alias beep='printf "\a"'
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-alias vim='nvim'
+n() { nvim "${@:-.}"; }
 
-n() { if [ "$#" -eq 0 ]; then command nvim .; else command nvim "$@"; fi; }
 open() (
 	xdg-open "$@" >/dev/null 2>&1 &
 )
@@ -161,14 +158,12 @@ alias todo="nvim ~/TODO.md"
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 
-# export HISTTIMEFORMAT="$(echo -e "\e[1;36m")[%d/%m %H:%M:%S]$(echo -e "\e[m") "
-
 if [[ "$TERM" = xterm ]]; then
 	TERM=xterm-256color
 fi
 
-export PATH=${PATH}:/opt/cuda/bin/:~/.local/bin/
-export LD_LIBRARY_PATH=/opt/cuda/lib64/:$LD_LIBRARY_PATH
+[[ ":$PATH:" != *":/opt/cuda/bin/:"* ]] && export PATH="$PATH:/opt/cuda/bin/"
+[[ ":$LD_LIBRARY_PATH:" != *":/opt/cuda/lib64/:"* ]] && export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/opt/cuda/lib64/"
 
 # **********
 # ** tmux **
@@ -191,7 +186,6 @@ function t() {
 
 if command -v fzf &>/dev/null; then
 	eval "$(fzf --bash)"
-fi
-if [ -f ~/.fzf.bash ]; then
+elif [ -f ~/.fzf.bash ]; then
 	source ~/.fzf.bash
 fi
