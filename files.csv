@@ -7,3 +7,5 @@ link,./config/ghostty/smear.glsl,~/.config/ghostty/
 !copy,./config/iwd/iwd_network_manager.conf,/etc/NetworkManager/conf.d/
 !copy,./config/iwd/main.conf,/etc/iwd/
 link,./config/xdg-terminals.list,~/.config/
+link,./config/zed/settings.json,~/.config/zed/
+link,./config/zed/keymap.json,~/.config/zed/

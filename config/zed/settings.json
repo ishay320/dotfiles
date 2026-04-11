@@ -1,0 +1,114 @@
+// Zed settings
+{
+  "git_panel": {
+    "tree_view": false,
+  },
+  "buffer_font_features": {
+    "calt": false, // Disable ligatures
+  },
+  "diagnostics": {
+    "inline": {
+      "enabled": true,
+    },
+  },
+  "scrollbar": {
+    "diagnostics": "all",
+  },
+  "colorize_brackets": true,
+  "indent_guides": {},
+  "languages": {
+    "Python": {
+      "inlay_hints": {
+        "enabled": true,
+      },
+    },
+  },
+  "lsp": {
+    "basedpyright": {
+      "settings": {
+        "basedpyright.analysis": {
+          "typeCheckingMode": "standard",
+        },
+      },
+    },
+  },
+  "semantic_tokens": "combined",
+  "agent": {
+    "default_model": {
+      "provider": "openrouter",
+      "model": "xiaomi/mimo-v2-flash",
+      "enable_thinking": true,
+    },
+    "favorite_models": [],
+    "model_parameters": [],
+  },
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry",
+    },
+  },
+  "edit_predictions": {
+    "copilot": {
+      "enable_next_edit_suggestions": true,
+    },
+    "mode": "eager",
+    "provider": "copilot",
+  },
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)",
+  },
+  "ssh_connections": [
+    {
+      "host": "192.168.1.202",
+      "username": "ishay",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/home/ishay"
+          ]
+        },
+        {
+          "paths": [
+            "/home/ishay/sensors"
+          ]
+        }
+      ]
+    },
+    {
+      "host": "10.0.0.52",
+      "username": "g2-agx",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/home/g2-agx/project/./"
+          ]
+        }
+      ]
+    },
+    {
+      "host": "10.0.0.52",
+      "username": "g2-agx",
+      "args": [],
+      "projects": []
+    },
+    {
+      "host": "10.0.0.52",
+      "username": "g2-agx",
+      "args": [],
+      "projects": []
+    }
+  ],
+  "vim_mode": false,
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "Catppuccin Mocha",
+  },
+  "autosave": "on_focus_change",
+}

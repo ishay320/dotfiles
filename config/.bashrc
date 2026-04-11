@@ -26,7 +26,6 @@ HISTCONTROL=ignoreboth:erasedups
 HISTSIZE=10000
 HISTFILESIZE=20000
 HISTTIMEFORMAT=$'\e[1;36m''[%d/%m %H:%M:%S]'$'\e[m'' '
-PROMPT_COMMAND="history -a; history -c; history -r; ${PROMPT_COMMAND}"
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
