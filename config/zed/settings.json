@@ -1,4 +1,10 @@
 // Zed settings
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
 {
   "git_panel": {
     "tree_view": false,
@@ -35,9 +41,9 @@
   "semantic_tokens": "combined",
   "agent": {
     "default_model": {
-      "provider": "openrouter",
-      "model": "xiaomi/mimo-v2-flash",
-      "enable_thinking": true,
+      "provider": "copilot_chat",
+      "model": "gpt-4.1",
+      "enable_thinking": false,
     },
     "favorite_models": [],
     "model_parameters": [],
@@ -66,16 +72,12 @@
       "args": [],
       "projects": [
         {
-          "paths": [
-            "/home/ishay"
-          ]
+          "paths": ["/home/ishay"],
         },
         {
-          "paths": [
-            "/home/ishay/sensors"
-          ]
-        }
-      ]
+          "paths": ["/home/ishay/sensors"],
+        },
+      ],
     },
     {
       "host": "10.0.0.52",
@@ -83,24 +85,22 @@
       "args": [],
       "projects": [
         {
-          "paths": [
-            "/home/g2-agx/project/./"
-          ]
-        }
-      ]
+          "paths": ["/home/g2-agx/project/./"],
+        },
+      ],
     },
     {
       "host": "10.0.0.52",
       "username": "g2-agx",
       "args": [],
-      "projects": []
+      "projects": [],
     },
     {
       "host": "10.0.0.52",
       "username": "g2-agx",
       "args": [],
-      "projects": []
-    }
+      "projects": [],
+    },
   ],
   "vim_mode": false,
   "ui_font_size": 16,
