@@ -6,6 +6,11 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "auto_install_extensions": {
+    "html": true,
+    "dockerfile": true,
+    "catppuccin": true,
+  },
   "git_panel": {
     "tree_view": false,
   },

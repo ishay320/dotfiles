@@ -109,5 +109,17 @@
         }
       ]
     }
+  },
+  {
+    "context": "Editor && mode == full",
+    "bindings": {
+      "alt-z": "editor::ToggleSoftWrap"
+    }
+  },
+  {
+    "context": "Editor && mode == full",
+    "unbind": {
+      "ctrl-k ctrl-z": "editor::ToggleSoftWrap"
+    }
   }
 ]
